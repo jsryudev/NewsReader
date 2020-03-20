@@ -25,7 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window.makeKeyAndVisible()
     
-    window.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
+    let splashViewController = SplashViewController()
+    window.rootViewController = splashViewController
     
     self.window = window
     
