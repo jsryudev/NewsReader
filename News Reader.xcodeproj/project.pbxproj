@@ -89,8 +89,8 @@
 		3FB5399A24247C06007EF2A1 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3FB5399D2424845A007EF2A1 /* ViewControllers */,
 				3FB5398524247A78007EF2A1 /* AppDelegate.swift */,
-				3FB5398924247A79007EF2A1 /* ViewController.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -103,13 +103,20 @@
 			path = Supports;
 			sourceTree = "<group>";
 		};
+		3FB5399D2424845A007EF2A1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3FB5398924247A79007EF2A1 /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		AF1E2DB44458A4480E186A61 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				839C181D0745F104EB3F1B75 /* Pods-News Reader.debug.xcconfig */,
 				954D22FAA99E30CBEBBF530E /* Pods-News Reader.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
