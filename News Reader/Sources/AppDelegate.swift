@@ -25,12 +25,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window.makeKeyAndVisible()
     
+    window.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
+    
+    self.window = window
+    
     let reactor = NewsListViewReactor()
     let newsListViewController = NewsListViewController(reactor: reactor)
     let navigationController = UINavigationController(rootViewController: newsListViewController)
     
-    window.rootViewController = navigationController
-    self.window = window
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.3) {
+      window.rootViewController = navigationController
+      self.window = window
+    }
     
     return true
   }
