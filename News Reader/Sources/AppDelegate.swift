@@ -15,6 +15,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
+    
+    let window = UIWindow(frame: UIScreen.main.bounds)
+    if #available(iOS 13.0, *) {
+      window.backgroundColor = .systemBackground
+    } else {
+      window.backgroundColor = .white
+    }
+    
+    window.makeKeyAndVisible()
+    
+    let reactor = NewsListViewReactor()
+    let newsListViewController = NewsListViewController(reactor: reactor)
+    let navigationController = UINavigationController(rootViewController: newsListViewController)
+    
+    window.rootViewController = navigationController
+    self.window = window
+    
     return true
   }
 }
