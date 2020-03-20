@@ -25,6 +25,6 @@ target 'News Reader' do
 
   # Convenience
   pod 'FeedKit', '~> 9.0'
-  pod 'OpenGraph', '~> 1.2.0'
+  pod 'OpenGraph', :git => 'https://github.com/jsryudev/OpenGraph.git'
 
 end

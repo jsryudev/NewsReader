@@ -30,7 +30,7 @@ PODS:
 
 DEPENDENCIES:
   - FeedKit (~> 9.0)
-  - OpenGraph (~> 1.2.0)
+  - OpenGraph (from `https://github.com/jsryudev/OpenGraph.git`)
   - ReactorKit
   - ReusableKit/RxSwift
   - RxDataSources
@@ -44,7 +44,6 @@ SPEC REPOS:
   trunk:
     - Differentiator
     - FeedKit
-    - OpenGraph
     - ReactorKit
     - ReusableKit
     - RxCocoa
@@ -55,6 +54,15 @@ SPEC REPOS:
     - RxViewController
     - SnapKit
     - Then
+
+EXTERNAL SOURCES:
+  OpenGraph:
+    :git: https://github.com/jsryudev/OpenGraph.git
+
+CHECKOUT OPTIONS:
+  OpenGraph:
+    :commit: dc782cba122e2ec15a8141773d4c6ab12db62d8e
+    :git: https://github.com/jsryudev/OpenGraph.git
 
 SPEC CHECKSUMS:
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
@@ -71,6 +79,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
-PODFILE CHECKSUM: ce101038acc39501f2bb5db6b6d84ffcdbaa36b1
+PODFILE CHECKSUM: a968c6be349b45271ea6ebe83d629f80a72b4096
 
 COCOAPODS: 1.8.4
