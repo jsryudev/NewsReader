@@ -23,6 +23,9 @@ target 'News Reader' do
   # Architecture Pattern
   pod 'ReactorKit'
 
+  # Networks
+  pod 'Moya/RxSwift', '~> 14.0.0'
+
   # Convenience
   pod 'FeedKit', '~> 9.0'
   pod 'SwiftSoup'
