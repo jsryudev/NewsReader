@@ -9,10 +9,11 @@
 import Foundation
 
 typealias Keywords = (String, String, String)
+
 struct News {
   let title: String
-  let url: URL
+  let url: URL?
   let content: String
-  let keywords: Keywords
-  let imageURL: URL
+  let imageURL: URL?
+}
 }
