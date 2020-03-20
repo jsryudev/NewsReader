@@ -10,11 +10,19 @@ import RxSwift
 import ReactorKit
 import RxDataSources
 
+typealias NewsListSection = SectionModel<Void, NewsCellReactor>
 class NewsListViewReactor: Reactor {
+  
   enum Action {
+    case refresh
+  }
+  
+  enum Mutation {
+    case setSections([NewsListSection])
   }
 
   struct State {
+    var sections: [NewsListSection]
   }
   
   let initialState: State
@@ -22,6 +30,35 @@ class NewsListViewReactor: Reactor {
   
   init(newsService: NewsServiceType) {
     self.newsSerivce = newsService
-    self.initialState = State()
+    self.initialState = State(sections: [])
+  }
+  
+  func mutate(action: NewsListViewReactor.Action) -> Observable<NewsListViewReactor.Mutation> {
+    switch action {
+    case .refresh:
+      return self.newsSerivce
+        .fetchNews()
+        .asObservable()
+        .map { news in
+          let sectionItems = news.compactMap { news -> NewsCellReactor? in
+            guard news.title.isNotEmpty, news.content.isNotEmpty else {
+               return nil
+            }
+            return NewsCellReactor(news: news)
+          }
+          
+          let section = NewsListSection(model: Void(), items: sectionItems)
+          return Mutation.setSections([section])
+      }
+    }
+  }
+  
+  func reduce(state: NewsListViewReactor.State, mutation: NewsListViewReactor.Mutation) -> NewsListViewReactor.State {
+    var newState = state
+    switch mutation {
+    case .setSections(let sections):
+      newState.sections = sections
+      return newState
+    }
   }
 }
