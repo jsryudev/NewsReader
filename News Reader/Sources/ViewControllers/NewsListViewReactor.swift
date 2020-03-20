@@ -18,8 +18,10 @@ class NewsListViewReactor: Reactor {
   }
   
   let initialState: State
+  let newsSerivce: NewsServiceType
   
-  init() {
+  init(newsService: NewsServiceType) {
+    self.newsSerivce = newsService
     self.initialState = State()
   }
 }

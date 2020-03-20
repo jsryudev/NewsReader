@@ -30,7 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     self.window = window
     
-    let reactor = NewsListViewReactor()
+    let newsService = NewsService()
+    let reactor = NewsListViewReactor(newsService: newsService)
     let newsListViewController = NewsListViewController(reactor: reactor)
     let navigationController = UINavigationController(rootViewController: newsListViewController)
     
