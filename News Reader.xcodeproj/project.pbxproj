@@ -54,14 +54,38 @@
 		3FB5398424247A78007EF2A1 /* News Reader */ = {
 			isa = PBXGroup;
 			children = (
-				3FB5398524247A78007EF2A1 /* AppDelegate.swift */,
-				3FB5398924247A79007EF2A1 /* ViewController.swift */,
-				3FB5398B24247A79007EF2A1 /* Main.storyboard */,
-				3FB5398E24247A7A007EF2A1 /* Assets.xcassets */,
-				3FB5399024247A7A007EF2A1 /* LaunchScreen.storyboard */,
-				3FB5399324247A7A007EF2A1 /* Info.plist */,
+				3FB5399924247BDE007EF2A1 /* Resources */,
+				3FB5399A24247C06007EF2A1 /* Sources */,
+				3FB5399B24247C20007EF2A1 /* Supports */,
 			);
 			path = "News Reader";
+			sourceTree = "<group>";
+		};
+		3FB5399924247BDE007EF2A1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3FB5398B24247A79007EF2A1 /* Main.storyboard */,
+				3FB5399024247A7A007EF2A1 /* LaunchScreen.storyboard */,
+				3FB5398E24247A7A007EF2A1 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3FB5399A24247C06007EF2A1 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				3FB5398524247A78007EF2A1 /* AppDelegate.swift */,
+				3FB5398924247A79007EF2A1 /* ViewController.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		3FB5399B24247C20007EF2A1 /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				3FB5399324247A7A007EF2A1 /* Info.plist */,
+			);
+			path = Supports;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,7 +305,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "News Reader/Info.plist";
+				DEVELOPMENT_TEAM = N5XHCFCPQR;
+				INFOPLIST_FILE = "$(SRCROOT)/News Reader/Supports/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -299,7 +324,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "News Reader/Info.plist";
+				DEVELOPMENT_TEAM = N5XHCFCPQR;
+				INFOPLIST_FILE = "$(SRCROOT)/News Reader/Supports/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
