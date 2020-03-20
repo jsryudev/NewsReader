@@ -25,5 +25,6 @@ target 'News Reader' do
 
   # Convenience
   pod 'FeedKit', '~> 9.0'
+  pod 'SwiftSoup'
 
 end
