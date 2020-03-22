@@ -32,8 +32,8 @@ class NewsListViewController: BaseViewController, View {
   })
   
   let tableView = UITableView().then {
-    $0.rowHeight = 150
     $0.register(Reusable.newsCell)
+    $0.rowHeight = 120
   }
   
   init(reactor: NewsListViewReactor) {
