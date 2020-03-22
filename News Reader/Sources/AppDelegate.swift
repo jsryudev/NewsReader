@@ -37,7 +37,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.3) {
       window.rootViewController = navigationController
-      self.window = window
+      UIView.transition(
+      with: window,
+      duration: 0.5,
+      options: .transitionCrossDissolve,
+      animations: nil) { _ in
+        self.window = window
+      }
     }
     
     return true
