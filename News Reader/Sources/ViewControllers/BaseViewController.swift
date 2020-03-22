@@ -28,8 +28,6 @@ class BaseViewController: UIViewController {
     self.view.setNeedsUpdateConstraints()
     self.addSubViews()
     
-    self.navigationController?.navigationBar.prefersLargeTitles = true
-    
     if #available(iOS 13.0, *) {
       self.view.backgroundColor = .systemBackground
     }
