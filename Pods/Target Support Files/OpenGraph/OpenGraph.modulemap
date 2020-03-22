@@ -1,0 +1,6 @@
+module OpenGraph {
+  umbrella header "OpenGraph-umbrella.h"
+
+  export *
+  module * { export * }
+}
