@@ -84,7 +84,7 @@ extension NewsService {
   
   func fetchOpenGraph(url: URL) -> Single<News?> {
     return Single.create { single in
-      OpenGraph.fetch(url: url) { result in
+      let task = OpenGraph.fetch(url: url, timeout: 3) { result in
         guard case .success(let openGraph) = result else {
           single(.success(nil))
           return
@@ -104,7 +104,10 @@ extension NewsService {
         
         single(.success(news))
       }
-      return Disposables.create()
+      
+      return Disposables.create {
+        task.cancel()
+      }
     }
   }
 }
