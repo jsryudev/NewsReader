@@ -20,7 +20,7 @@ class SplashViewController: BaseViewController {
   
   struct Color {
     static let description = UIColor.darkGray
-    static let circle = UIColor.lightGray
+    static let lightGray = UIColor.lightGray
   }
   
   struct Font {
@@ -40,7 +40,7 @@ class SplashViewController: BaseViewController {
   }
   
   let circleView = UIView().then {
-    $0.backgroundColor = Color.circle
+    $0.backgroundColor = Color.lightGray
     $0.layer.cornerRadius = Metric.cornerRadius
   }
   
