@@ -96,9 +96,9 @@ extension NewsService {
         }
 
         let news = News(
-          title: title,
+          title: title.attributed,
           url: url,
-          content: content,
+          content: content.attributed,
           imageURL: URL(string: openGraph[.image] ?? "")
         )
         
