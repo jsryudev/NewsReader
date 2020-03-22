@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 import RxSwift
 import RxCocoa
@@ -84,6 +85,15 @@ extension NewsListViewController {
     reactor.state
       .map { $0.sections }
       .bind(to: tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+    
+    tableView.rx.modelSelected(NewsCellReactor.self)
+    .subscribe(
+      onNext: { [weak self] reactor in
+        guard let `self` = self else { return }
+        let safari = SFSafariViewController(url: reactor.currentState.url)
+        self.present(safari, animated: true)
+    })
       .disposed(by: disposeBag)
   }
 }
