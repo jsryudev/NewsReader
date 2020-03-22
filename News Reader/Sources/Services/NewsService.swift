@@ -74,6 +74,7 @@ extension NewsService {
         items.forEach { item in
           observable.onNext(item)
         }
+        
         observable.onCompleted()
       }
       
@@ -88,11 +89,16 @@ extension NewsService {
           single(.success(nil))
           return
         }
+        
+        guard let title = openGraph[.title], let content = openGraph[.description] else {
+          single(.success(nil))
+          return
+        }
 
         let news = News(
-          title: openGraph[.title] ?? "",
+          title: title,
           url: url,
-          content: openGraph[.description] ?? "",
+          content: content,
           imageURL: URL(string: openGraph[.image] ?? "")
         )
         

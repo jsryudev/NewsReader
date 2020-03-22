@@ -40,13 +40,7 @@ class NewsListViewReactor: Reactor {
         .fetchNews()
         .asObservable()
         .map { news in
-          let sectionItems = news.compactMap { news -> NewsCellReactor? in
-            guard news.title.isNotEmpty, news.content.isNotEmpty else {
-               return nil
-            }
-            return NewsCellReactor(news: news)
-          }
-          
+          let sectionItems = news.map(NewsCellReactor.init)
           let section = NewsListSection(model: Void(), items: sectionItems)
           return Mutation.setSections([section])
       }
