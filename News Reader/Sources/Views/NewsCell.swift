@@ -10,5 +10,24 @@ import RxSwift
 import SnapKit
 import ReactorKit
 
-class NewsCell: BaseTableViewCell {
+class NewsCell: BaseTableViewCell, View {
+  typealias Reactor = NewsCellReactor
+  
+  let titleLabel = UILabel()
+  
+  override func initialize() {
+    self.addSubview(titleLabel)
+  }
+  
+  override func setupConstraints() {
+    titleLabel.snp.makeConstraints { make in
+      make.center.equalToSuperview()
+    }
+  }
+}
+
+extension NewsCell {
+  func bind(reactor: NewsCellReactor) {
+    self.titleLabel.text = reactor.currentState.title
+  }
 }

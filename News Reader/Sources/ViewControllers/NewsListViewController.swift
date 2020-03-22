@@ -10,12 +10,30 @@ import UIKit
 
 import RxSwift
 import RxCocoa
+import RxDataSources
+import RxViewController
 import SnapKit
 import ReactorKit
+import ReusableKit
 import Then
 
 class NewsListViewController: BaseViewController, View {
   typealias Reactor = NewsListViewReactor
+  
+  struct Reusable {
+    static let newsCell = ReusableCell<NewsCell>()
+  }
+  
+  let dataSource = RxTableViewSectionedReloadDataSource<NewsListSection>(
+    configureCell: { _, tableView, indexPath, reactor in
+      let cell = tableView.dequeue(Reusable.newsCell, for: indexPath)
+      cell.reactor = reactor
+      return cell
+  })
+  
+  let tableView = UITableView().then {
+    $0.register(Reusable.newsCell)
+  }
   
   init(reactor: NewsListViewReactor) {
     super.init()
@@ -28,10 +46,36 @@ class NewsListViewController: BaseViewController, View {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.title = "News"
+    self.view.addSubview(tableView)
+  }
+  
+  override func setupConstraints() {
+    tableView.snp.makeConstraints { make in
+      make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
+    }
   }
 }
 
 extension NewsListViewController {
   func bind(reactor: NewsListViewReactor) {
+    self.tableView.rx.setDelegate(self).disposed(by: disposeBag)
+    
+    self.rx.viewDidLoad
+      .map { Reactor.Action.refresh }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    
+    reactor.state
+      .map { $0.sections }
+      .bind(to: tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+  }
+}
+
+extension NewsListViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 100
   }
 }
