@@ -6,7 +6,7 @@
 //  Copyright © 2020 JunSang Ryu. All rights reserved.
 //
 
-import FeedKit
+import FeedKit // nmdias/FeedKit https://github.com/nmdias/FeedKit
 
 struct RSS {
   let feed: RSSFeedItem

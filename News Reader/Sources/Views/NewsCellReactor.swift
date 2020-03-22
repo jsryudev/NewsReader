@@ -6,7 +6,7 @@
 //  Copyright © 2020 JunSang Ryu. All rights reserved.
 //
 
-import ReactorKit
+import ReactorKit // ReactorKit/ReactorKit (https://github.com/ReactorKit/ReactorKit)
 
 class NewsCellReactor: Reactor {
   typealias Action = NoAction

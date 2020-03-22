@@ -8,7 +8,7 @@
 
 import UIKit
 
-import RxSwift
+import RxSwift // ReactiveX/RxSwift (https://github.com/ReactiveX/RxSwift)
 
 class BaseTableViewCell: UITableViewCell {
   var disposeBag: DisposeBag = DisposeBag()

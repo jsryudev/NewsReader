@@ -8,8 +8,8 @@
 
 import UIKit
 
-import SnapKit
-import Then
+import SnapKit // SnapKit/SnapKit (https://github.com/SnapKit/SnapKit)
+import Then // devxoul/Then (https://github.com/devxoul/Then)
 
 class SplashViewController: BaseViewController {
   

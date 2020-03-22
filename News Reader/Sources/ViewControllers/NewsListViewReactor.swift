@@ -6,9 +6,9 @@
 //  Copyright © 2020 JunSang Ryu. All rights reserved.
 //
 
-import RxSwift
-import ReactorKit
-import RxDataSources
+import RxSwift // ReactiveX/RxSwift (https://github.com/ReactiveX/RxSwift)
+import ReactorKit // ReactorKit/ReactorKit (https://github.com/ReactorKit/ReactorKit)
+import RxDataSources // RxSwiftCommunity/RxDataSources (https://github.com/RxSwiftCommunity/RxDataSources)
 
 typealias NewsListSection = SectionModel<Void, NewsCellReactor>
 class NewsListViewReactor: Reactor {
