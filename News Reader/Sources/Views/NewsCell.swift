@@ -30,7 +30,6 @@ class NewsCell: BaseTableViewCell, ReactorKit.View {
   }
   
   let keywordsView = KeywordsView()
- 
   
   override func prepareForReuse() {
     super.prepareForReuse()
