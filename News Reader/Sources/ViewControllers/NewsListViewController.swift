@@ -31,6 +31,8 @@ class NewsListViewController: BaseViewController, View {
       return cell
   })
   
+  let refreshControl = UIRefreshControl()
+  
   let tableView = UITableView().then {
     $0.register(Reusable.newsCell)
     $0.rowHeight = 120
@@ -49,12 +51,13 @@ class NewsListViewController: BaseViewController, View {
     super.viewDidLoad()
     
     self.title = "News"
+    tableView.refreshControl = refreshControl
     self.view.addSubview(tableView)
   }
   
   override func setupConstraints() {
     tableView.snp.makeConstraints { make in
-      make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
+      make.edges.equalToSuperview()
     }
   }
 }
@@ -64,6 +67,18 @@ extension NewsListViewController {
     self.rx.viewDidLoad
       .map { Reactor.Action.refresh }
       .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    
+    refreshControl.rx
+      .controlEvent(.valueChanged)
+      .map { Reactor.Action.refresh }
+      .bind(to: reactor.action)
+      .disposed(by: disposeBag)
+    
+    reactor.state
+      .map { $0.isLoading }
+      .skip(1)
+      .bind(to: refreshControl.rx.isRefreshing)
       .disposed(by: disposeBag)
     
     reactor.state
