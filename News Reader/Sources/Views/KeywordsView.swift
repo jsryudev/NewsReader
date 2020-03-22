@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Then // devxoul/Then (https://github.com/devxoul/Then)
+
 class KeywordsView: UIStackView {
   
   struct Metric {

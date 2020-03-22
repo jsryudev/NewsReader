@@ -9,14 +9,14 @@
 import UIKit
 import SafariServices
 
-import RxSwift
-import RxCocoa
-import RxDataSources
-import RxViewController
-import SnapKit
-import ReactorKit
-import ReusableKit
-import Then
+import RxSwift // ReactiveX/RxSwift (https://github.com/ReactiveX/RxSwift)
+import RxCocoa // ReactiveX/RxCocoa (https://github.com/ReactiveX/RxSwift)
+import RxDataSources // RxSwiftCommunity/RxDataSources (https://github.com/RxSwiftCommunity/RxDataSources)
+import RxViewController // devxoul/RxViewController (https://github.com/devxoul/RxViewController)
+import SnapKit // SnapKit/SnapKit (https://github.com/SnapKit/SnapKit)
+import ReactorKit // ReactorKit/ReactorKit (https://github.com/ReactorKit/ReactorKit)
+import ReusableKit // devxoul/ReusableKit (https://github.com/devxoul/ReusableKit)
+import Then // devxoul/Then (https://github.com/devxoul/Then)
 
 class NewsListViewController: BaseViewController, View {
   typealias Reactor = NewsListViewReactor

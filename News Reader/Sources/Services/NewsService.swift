@@ -6,10 +6,11 @@
 //  Copyright © 2020 JunSang Ryu. All rights reserved.
 //
 
-import RxSwift
-import FeedKit
-import OpenGraph
-import RxOptional
+import RxSwift // ReactiveX/RxSwift (https://github.com/ReactiveX/RxSwift)
+import RxOptional // RxSwiftCommunity/RxOptional https://github.com/RxSwiftCommunity/RxOptional
+import FeedKit // nmdias/FeedKit https://github.com/nmdias/FeedKit
+import OpenGraph // origin. satoshi-takano/OpenGraph https://github.com/satoshi-takano/OpenGraph
+// fork. jsryudev/OpenGraph : https://github.com/jsryudev/OpenGraph
 
 protocol NewsServiceType {
   func fetchNews() -> Single<[News]>

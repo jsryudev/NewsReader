@@ -6,10 +6,10 @@
 //  Copyright © 2020 JunSang Ryu. All rights reserved.
 //
 
-import RxSwift
-import SnapKit
-import ReactorKit
-import Kingfisher
+import RxSwift // ReactiveX/RxSwift (https://github.com/ReactiveX/RxSwift)
+import SnapKit // SnapKit/SnapKit (https://github.com/SnapKit/SnapKit)
+import ReactorKit // ReactorKit/ReactorKit (https://github.com/ReactorKit/ReactorKit)
+import Kingfisher // onevcat/Kingfisher https://github.com/onevcat/Kingfisher
 
 class NewsCell: BaseTableViewCell, ReactorKit.View {
   typealias Reactor = NewsCellReactor
