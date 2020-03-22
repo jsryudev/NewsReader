@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		15790D6C72D56E89DFE11198 /* libPods-News Reader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5765C3D5C0C3BD51428B07CA /* libPods-News Reader.a */; };
+		3F56E9412427C0FC00B3C9FC /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F56E9402427C0FC00B3C9FC /* String+Extension.swift */; };
 		3FB5398624247A78007EF2A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB5398524247A78007EF2A1 /* AppDelegate.swift */; };
 		3FB5398A24247A79007EF2A1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB5398924247A79007EF2A1 /* BaseViewController.swift */; };
 		3FB5398F24247A7A007EF2A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FB5398E24247A7A007EF2A1 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F56E9402427C0FC00B3C9FC /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		3FB5398224247A78007EF2A1 /* News Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "News Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FB5398524247A78007EF2A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FB5398924247A79007EF2A1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,14 @@
 				5765C3D5C0C3BD51428B07CA /* libPods-News Reader.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3F56E93F2427C0D800B3C9FC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3F56E9402427C0FC00B3C9FC /* String+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		3FB5397924247A78007EF2A1 = {
@@ -104,6 +114,7 @@
 		3FB5399A24247C06007EF2A1 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3F56E93F2427C0D800B3C9FC /* Extensions */,
 				3FB539B12424B77D007EF2A1 /* Models */,
 				3FB539A62424A8A1007EF2A1 /* Services */,
 				3FB5399D2424845A007EF2A1 /* ViewControllers */,
@@ -268,6 +279,7 @@
 				3FB539A124248857007EF2A1 /* NewsListViewReactor.swift in Sources */,
 				3FB5399F242486B0007EF2A1 /* NewsListViewController.swift in Sources */,
 				3FB5398A24247A79007EF2A1 /* BaseViewController.swift in Sources */,
+				3F56E9412427C0FC00B3C9FC /* String+Extension.swift in Sources */,
 				3FB539DB24252056007EF2A1 /* NewsCell.swift in Sources */,
 				3FB539D924251FD2007EF2A1 /* BaseTableViewCell.swift in Sources */,
 				3FB539B32424B78B007EF2A1 /* News.swift in Sources */,
