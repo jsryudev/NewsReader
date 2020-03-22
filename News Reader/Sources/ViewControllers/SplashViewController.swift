@@ -25,6 +25,7 @@ class SplashViewController: BaseViewController {
   
   struct Font {
     static let description = UIFont.systemFont(ofSize: 17, weight: .semibold)
+    static let version = UIFont.systemFont(ofSize: 14, weight: .semibold)
   }
   
   struct Text {
@@ -81,8 +82,14 @@ class SplashViewController: BaseViewController {
     $0.numberOfLines = 0
   }
   
+  let versionLabel = UILabel().then {
+    $0.font = Font.version
+    $0.textColor = Color.lightGray
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    fetchVersion()
   }
   
   override func addSubViews() {
@@ -96,6 +103,7 @@ class SplashViewController: BaseViewController {
     self.view.addSubview(worldWideImageView)
     self.view.addSubview(circleView)
     self.view.addSubview(descriptionStackView)
+    self.view.addSubview(versionLabel)
   }
   
   override func setupConstraints() {
@@ -128,5 +136,17 @@ class SplashViewController: BaseViewController {
       make.top.equalTo(circleView.snp.bottom).offset(50)
       make.centerX.equalToSuperview()
     }
+    
+    versionLabel.snp.makeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(10)
+    }
+  }
+}
+
+extension SplashViewController {
+  func fetchVersion() {
+    let currentVersion = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "N/A"
+    versionLabel.text = "v \(currentVersion)"
   }
 }
