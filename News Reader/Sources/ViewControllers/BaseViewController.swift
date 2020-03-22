@@ -11,19 +11,19 @@ import UIKit
 import RxSwift
 
 class BaseViewController: UIViewController {
-
+  
   init() {
     super.init(nibName: nil, bundle: nil)
   }
-
+  
   required convenience init?(coder aDecoder: NSCoder) {
     self.init()
   }
-
+  
   var disposeBag = DisposeBag()
-
+  
   private(set) var didSetupConstraints = false
-
+  
   override func viewDidLoad() {
     self.view.setNeedsUpdateConstraints()
     self.addSubViews()
@@ -32,7 +32,7 @@ class BaseViewController: UIViewController {
       self.view.backgroundColor = .systemBackground
     }
   }
-
+  
   override func updateViewConstraints() {
     if !self.didSetupConstraints {
       self.setupConstraints()
@@ -40,11 +40,11 @@ class BaseViewController: UIViewController {
     }
     super.updateViewConstraints()
   }
-
+  
   func addSubViews() {
     // Override point
   }
-
+  
   func setupConstraints() {
     // Override point
   }

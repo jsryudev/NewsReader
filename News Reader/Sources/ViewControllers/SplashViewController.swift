@@ -13,46 +13,72 @@ import Then
 
 class SplashViewController: BaseViewController {
   
+  struct Metric {
+    static let spacing = CGFloat(integerLiteral: 10)
+    static let cornerRadius = CGFloat(integerLiteral: 75)
+  }
+  
+  struct Color {
+    static let description = UIColor.darkGray
+    static let circle = UIColor.lightGray
+  }
+  
+  struct Font {
+    static let description = UIFont.systemFont(ofSize: 17, weight: .semibold)
+  }
+  
+  struct Text {
+    static let desciption1 = "최신 뉴스를 제공합니다."
+    static let desciption2 = "뉴스의 키워드를 알아보세요"
+    static let desciption3 = "뉴스를 클릭하면 원본 뉴스를\n볼 수 있습니다."
+  }
+  
+  struct Image {
+    static let rss = UIImage(named: "rss-icon")
+    static let logo = UIImage(named: "news-icon")
+    static let worldWide = UIImage(named: "worldwide-icon")
+  }
+  
   let circleView = UIView().then {
-    $0.backgroundColor = .lightGray
-    $0.layer.cornerRadius = 75
+    $0.backgroundColor = Color.circle
+    $0.layer.cornerRadius = Metric.cornerRadius
   }
   
   let rssImageView = UIImageView().then {
-    $0.image = UIImage(named: "rss-icon")
+    $0.image = Image.rss
   }
   
   let logoImageView = UIImageView().then {
-    $0.image = UIImage(named: "news-icon")
+    $0.image = Image.logo
   }
   
   let worldWideImageView = UIImageView().then {
-    $0.image = UIImage(named: "worldwide-icon")
+    $0.image = Image.worldWide
   }
   
   let descriptionStackView = UIStackView().then {
     $0.axis = .vertical
-    $0.spacing = 10
+    $0.spacing = Metric.spacing
   }
   
   // FIXME: naming
   let description1Label = UILabel().then {
-    $0.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-    $0.textColor = .darkGray
-    $0.text = "최신 뉴스를 제공합니다."
+    $0.font = Font.description
+    $0.text = Text.desciption1
+    $0.textColor = Color.description
   }
   
   let description2Label = UILabel().then {
-    $0.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-    $0.textColor = .darkGray
-    $0.text = "뉴스의 키워드를 알아보세요"
+    $0.font = Font.description
+    $0.text = Text.desciption2
+    $0.textColor = Color.description
   }
   
   let description3Label = UILabel().then {
-    $0.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-    $0.textColor = .darkGray
+    $0.font = Font.description
+    $0.text = Text.desciption3
+    $0.textColor = Color.description
     $0.numberOfLines = 0
-    $0.text = "뉴스를 클릭하면 원본 뉴스를\n볼 수 있습니다."
   }
   
   override func viewDidLoad() {
@@ -65,7 +91,7 @@ class SplashViewController: BaseViewController {
     descriptionStackView.addArrangedSubview(description1Label)
     descriptionStackView.addArrangedSubview(description2Label)
     descriptionStackView.addArrangedSubview(description3Label)
-
+    
     self.view.addSubview(rssImageView)
     self.view.addSubview(worldWideImageView)
     self.view.addSubview(circleView)

@@ -25,6 +25,14 @@ class NewsListViewController: BaseViewController, View {
     static let newsCell = ReusableCell<NewsCell>()
   }
   
+  struct Metric {
+    static let rowHeight = CGFloat(integerLiteral: 120)
+  }
+  
+  struct Text {
+    static let title = "News"
+  }
+  
   let dataSource = RxTableViewSectionedReloadDataSource<NewsListSection>(
     configureCell: { _, tableView, indexPath, reactor in
       let cell = tableView.dequeue(Reusable.newsCell, for: indexPath)
@@ -36,7 +44,7 @@ class NewsListViewController: BaseViewController, View {
   
   let tableView = UITableView().then {
     $0.register(Reusable.newsCell)
-    $0.rowHeight = 120
+    $0.rowHeight = Metric.rowHeight
   }
   
   init(reactor: NewsListViewReactor) {
@@ -50,8 +58,8 @@ class NewsListViewController: BaseViewController, View {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.title = Text.title
     
-    self.title = "News"
     tableView.refreshControl = refreshControl
     self.view.addSubview(tableView)
   }
@@ -88,12 +96,20 @@ extension NewsListViewController {
       .disposed(by: disposeBag)
     
     tableView.rx.modelSelected(NewsCellReactor.self)
-    .subscribe(
-      onNext: { [weak self] reactor in
-        guard let `self` = self else { return }
-        let safari = SFSafariViewController(url: reactor.currentState.url)
-        self.present(safari, animated: true)
-    })
+      .subscribe(
+        onNext: { [weak self] reactor in
+          guard let `self` = self else { return }
+          let safari = SFSafariViewController(url: reactor.currentState.url)
+          self.present(safari, animated: true)
+      })
+      .disposed(by: disposeBag)
+    
+    tableView.rx.itemSelected
+      .subscribe(
+        onNext: { [weak self] indexPath in
+          guard let `self` = self else { return }
+          self.tableView.deselectRow(at: indexPath, animated: true)
+      })
       .disposed(by: disposeBag)
   }
 }

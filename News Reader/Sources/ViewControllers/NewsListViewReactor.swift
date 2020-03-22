@@ -21,7 +21,7 @@ class NewsListViewReactor: Reactor {
     case setSections([NewsListSection])
     case setLoading(Bool)
   }
-
+  
   struct State {
     var sections: [NewsListSection]
     var isLoading: Bool

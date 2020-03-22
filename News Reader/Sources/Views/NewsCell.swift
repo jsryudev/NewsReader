@@ -14,29 +14,42 @@ import Kingfisher
 class NewsCell: BaseTableViewCell, ReactorKit.View {
   typealias Reactor = NewsCellReactor
   
+  struct Metric {
+    static let borderWidth = CGFloat(integerLiteral: 1)
+    static let numberOfLines = 2
+  }
+  
+  struct Color {
+    static let border = UIColor.black.cgColor
+    static let contents = UIColor.darkGray
+    static let background = UIColor.white
+  }
+  
+  struct Font {
+    static let title = UIFont.systemFont(ofSize: 16, weight: .bold)
+    static let contents = UIFont.systemFont(ofSize: 14)
+  }
+  
+  struct Image {
+    static let noImage = UIImage(named: "no-image")
+  }
+  
   let newsImageView = UIImageView().then {
-    $0.layer.borderColor = UIColor.black.cgColor
-    $0.layer.borderWidth = 1
+    $0.layer.borderColor = Color.border
+    $0.layer.borderWidth = Metric.borderWidth
   }
   
   let titleLabel = UILabel().then {
-    $0.font = .systemFont(ofSize: 16, weight: .bold)
+    $0.font = Font.title
   }
   
   let contentsLabel = UILabel().then {
-    $0.numberOfLines = 2
-    $0.font = .systemFont(ofSize: 14)
-    $0.textColor = .darkGray
+    $0.font = Font.contents
+    $0.textColor = Color.contents
+    $0.numberOfLines = Metric.numberOfLines
   }
   
   let keywordsView = KeywordsView()
-  
-  override func prepareForReuse() {
-    super.prepareForReuse()
-    
-    newsImageView.isHidden = false
-    newsImageView.backgroundColor = .white
-  }
   
   override func initialize() {
     self.addSubview(newsImageView)
@@ -80,7 +93,7 @@ extension NewsCell {
     if let imageURL = reactor.currentState.imageURL {
       newsImageView.kf.setImage(with: imageURL)
     } else {
-      newsImageView.image = UIImage(named: "no-image")
+      newsImageView.image = Image.noImage
     }
   }
 }

@@ -50,5 +50,5 @@ class PaddingLabel: UILabel {
     let heigth = superSizeThatFits.height + padding.top + padding.bottom
     return CGSize(width: width, height: heigth)
   }
-
+  
 }

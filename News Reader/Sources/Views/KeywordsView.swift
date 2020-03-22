@@ -9,32 +9,48 @@
 import UIKit
 
 class KeywordsView: UIStackView {
-  let keyword1Label = PaddingLabel(padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)).then {
-    $0.font = .systemFont(ofSize: 12)
-    $0.layer.borderColor = UIColor.white.cgColor
-    $0.layer.borderWidth = 1
-    $0.layer.cornerRadius = 7
+  
+  struct Metric {
+    static let insets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    static let spacing = CGFloat(integerLiteral: 5)
+    static let borderWidth = CGFloat(integerLiteral: 1)
+    static let cornerRadius = CGFloat(integerLiteral: 7)
   }
   
-  let keyword2Label = PaddingLabel(padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)).then {
-    $0.font = .systemFont(ofSize: 12)
-    $0.layer.borderColor = UIColor.white.cgColor
-    $0.layer.borderWidth = 1
-    $0.layer.cornerRadius = 7
+  struct Color {
+    static let keyword = UIColor.white.cgColor
   }
   
-  let keyword3Label = PaddingLabel(padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)).then {
-    $0.font = .systemFont(ofSize: 12)
-    $0.layer.borderColor = UIColor.white.cgColor
-    $0.layer.borderWidth = 1
-    $0.layer.cornerRadius = 7
+  struct Font {
+    static let keyword = UIFont.systemFont(ofSize: 12)
+  }
+  
+  let keyword1Label = PaddingLabel(padding: Metric.insets).then {
+    $0.font = Font.keyword
+    $0.layer.borderColor = Color.keyword
+    $0.layer.borderWidth = Metric.borderWidth
+    $0.layer.cornerRadius = Metric.cornerRadius
+  }
+  
+  let keyword2Label = PaddingLabel(padding: Metric.insets).then {
+    $0.font = Font.keyword
+    $0.layer.borderColor = Color.keyword
+    $0.layer.borderWidth = Metric.borderWidth
+    $0.layer.cornerRadius = Metric.cornerRadius
+  }
+  
+  let keyword3Label = PaddingLabel(padding: Metric.insets).then {
+    $0.font = Font.keyword
+    $0.layer.borderColor = Color.keyword
+    $0.layer.borderWidth = Metric.borderWidth
+    $0.layer.cornerRadius = Metric.cornerRadius
   }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    self.spacing = 5
     self.axis = .horizontal
+    self.spacing = Metric.spacing
     self.addArrangedSubview(keyword1Label)
     self.addArrangedSubview(keyword2Label)
     self.addArrangedSubview(keyword3Label)
