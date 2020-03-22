@@ -15,6 +15,7 @@ struct News {
   let url: URL
   let content: String
   let imageURL: URL?
+  let pubDate: Date
 }
 
 extension News {
