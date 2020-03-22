@@ -93,7 +93,7 @@ extension NewsService {
           title: openGraph[.title] ?? "",
           url: url,
           content: openGraph[.description] ?? "",
-          imageURL: URL(string: openGraph[.imageUrl] ?? "")
+          imageURL: URL(string: openGraph[.image] ?? "")
         )
         
         single(.success(news))
