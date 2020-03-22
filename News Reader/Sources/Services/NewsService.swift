@@ -34,7 +34,6 @@ final class NewsService: NewsServiceType {
       }
       
       let fetchNews = self.fetchRSS()
-        .compactMap { URL(string: $0.link ?? "") }
         .flatMap(self.fetchOpenGraph)
         .filterNil()
         .toArray()
@@ -53,7 +52,7 @@ final class NewsService: NewsServiceType {
 }
 
 extension NewsService {
-  func fetchRSS() -> Observable<RSSFeedItem> {
+  func fetchRSS() -> Observable<RSS> {
     return Observable.create { [weak self] observable in
       guard let `self` = self else {
         observable.onError(NewsReaderError.unknown)
@@ -72,7 +71,12 @@ extension NewsService {
         }
         
         items.forEach { item in
-          observable.onNext(item)
+          let feed = RSS(
+            feed: item,
+            pubDate: item.pubDate ?? Date()
+          )
+          
+          observable.onNext(feed)
         }
         
         observable.onCompleted()
@@ -82,8 +86,13 @@ extension NewsService {
     }
   }
   
-  func fetchOpenGraph(url: URL) -> Single<News?> {
+  func fetchOpenGraph(rss: RSS) -> Single<News?> {
     return Single.create { single in
+      guard let url = URL(string: rss.feed.link ?? "") else {
+        single(.success(nil))
+        return Disposables.create()
+      }
+      
       let task = OpenGraph.fetch(url: url, timeout: 3) { result in
         guard case .success(let openGraph) = result else {
           single(.success(nil))
@@ -99,7 +108,8 @@ extension NewsService {
           title: title.attributed,
           url: url,
           content: content.attributed,
-          imageURL: URL(string: openGraph[.image] ?? "")
+          imageURL: URL(string: openGraph[.image] ?? ""),
+          pubDate: rss.pubDate
         )
         
         single(.success(news))
