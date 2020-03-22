@@ -18,7 +18,7 @@ class KeywordsView: UIStackView {
   }
   
   struct Color {
-    static let keyword = UIColor.white.cgColor
+    static let keyword = UIColor.darkGray
   }
   
   struct Font {
@@ -27,21 +27,24 @@ class KeywordsView: UIStackView {
   
   let keyword1Label = PaddingLabel(padding: Metric.insets).then {
     $0.font = Font.keyword
-    $0.layer.borderColor = Color.keyword
+    $0.textColor = Color.keyword
+    $0.layer.borderColor = Color.keyword.cgColor
     $0.layer.borderWidth = Metric.borderWidth
     $0.layer.cornerRadius = Metric.cornerRadius
   }
   
   let keyword2Label = PaddingLabel(padding: Metric.insets).then {
     $0.font = Font.keyword
-    $0.layer.borderColor = Color.keyword
+    $0.textColor = Color.keyword
+    $0.layer.borderColor = Color.keyword.cgColor
     $0.layer.borderWidth = Metric.borderWidth
     $0.layer.cornerRadius = Metric.cornerRadius
   }
   
   let keyword3Label = PaddingLabel(padding: Metric.insets).then {
     $0.font = Font.keyword
-    $0.layer.borderColor = Color.keyword
+    $0.textColor = Color.keyword
+    $0.layer.borderColor = Color.keyword.cgColor
     $0.layer.borderWidth = Metric.borderWidth
     $0.layer.cornerRadius = Metric.cornerRadius
   }
