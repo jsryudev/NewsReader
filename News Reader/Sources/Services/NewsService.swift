@@ -38,7 +38,6 @@ final class NewsService: NewsServiceType {
         .flatMap(self.fetchOpenGraph)
         .filterNil()
         .toArray()
-        .debug()
         .subscribe(
           onSuccess: { news in
             single(.success(news))
