@@ -12,7 +12,7 @@ typealias Keywords = (String, String, String)
 
 struct News {
   let title: String
-  let url: URL?
+  let url: URL
   let content: String
   let imageURL: URL?
 }
@@ -41,4 +41,3 @@ extension News {
     )
   }
 }
-
