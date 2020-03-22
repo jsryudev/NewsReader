@@ -48,7 +48,8 @@ class NewsListViewReactor: Reactor {
         .asObservable()
         .map { news -> Mutation in
           let sectionItems = news.map(NewsCellReactor.init)
-          let section = NewsListSection(model: Void(), items: sectionItems)
+          let sorted = sectionItems.sorted { $0.currentState.pubDate > $1.currentState.pubDate }
+          let section = NewsListSection(model: Void(), items: sorted)
           return Mutation.setSections([section])
       }
       
