@@ -61,7 +61,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   OpenGraph:
-    :commit: dc782cba122e2ec15a8141773d4c6ab12db62d8e
+    :commit: fd43d4037c800628a12aa0f677792bf03ac5dff6
     :git: https://github.com/jsryudev/OpenGraph.git
 
 SPEC CHECKSUMS:
