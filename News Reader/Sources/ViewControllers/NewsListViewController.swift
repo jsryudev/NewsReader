@@ -32,6 +32,7 @@ class NewsListViewController: BaseViewController, View {
   })
   
   let tableView = UITableView().then {
+    $0.rowHeight = 150
     $0.register(Reusable.newsCell)
   }
   
@@ -60,8 +61,6 @@ class NewsListViewController: BaseViewController, View {
 
 extension NewsListViewController {
   func bind(reactor: NewsListViewReactor) {
-    self.tableView.rx.setDelegate(self).disposed(by: disposeBag)
-    
     self.rx.viewDidLoad
       .map { Reactor.Action.refresh }
       .bind(to: reactor.action)
@@ -71,11 +70,5 @@ extension NewsListViewController {
       .map { $0.sections }
       .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
-  }
-}
-
-extension NewsListViewController: UITableViewDelegate {
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 100
   }
 }
