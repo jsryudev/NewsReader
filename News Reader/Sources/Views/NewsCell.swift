@@ -79,7 +79,7 @@ class NewsCell: BaseTableViewCell, ReactorKit.View {
     }
     
     keywordsView.snp.makeConstraints { make in
-      make.top.equalTo(contentsLabel.snp.bottom).offset(10)
+      make.bottom.equalToSuperview().offset(-15)
       make.left.equalTo(newsImageView.snp.right).offset(8)
     }
   }
