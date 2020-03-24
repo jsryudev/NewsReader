@@ -31,6 +31,8 @@ class NewsListViewController: BaseViewController, View {
   
   struct Text {
     static let title = "News"
+    static let alertTitle = "Error"
+    static let alertAction = "알았어요!"
   }
   
   let dataSource = RxTableViewSectionedReloadDataSource<NewsListSection>(
@@ -95,6 +97,16 @@ extension NewsListViewController {
       .bind(to: tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
+    reactor.error
+      .map { $0 as? NRError }
+      .filterNil()
+      .subscribe(
+        onNext: { [weak self] error in
+          guard let `self` = self else { return }
+          self.showAlert(error: error)
+      })
+      .disposed(by: disposeBag)
+    
     tableView.rx.modelSelected(NewsCellReactor.self)
       .subscribe(
         onNext: { [weak self] reactor in
@@ -111,5 +123,23 @@ extension NewsListViewController {
           self.tableView.deselectRow(at: indexPath, animated: true)
       })
       .disposed(by: disposeBag)
+  }
+}
+
+extension NewsListViewController {
+  func showAlert(error: NRError) {
+    let alertController = UIAlertController(
+      title: Text.alertTitle,
+      message: error.localizedDescription,
+      preferredStyle: .alert
+    )
+    
+    let action = UIAlertAction(
+      title: Text.alertAction,
+      style: .default
+    )
+    
+    alertController.addAction(action)
+    present(alertController, animated: true)
   }
 }

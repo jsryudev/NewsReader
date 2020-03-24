@@ -79,7 +79,7 @@ class NewsCell: BaseTableViewCell, ReactorKit.View {
     }
     
     keywordsView.snp.makeConstraints { make in
-      make.top.equalTo(contentsLabel.snp.bottom).offset(10)
+      make.bottom.equalToSuperview().offset(-15)
       make.left.equalTo(newsImageView.snp.right).offset(8)
     }
   }
@@ -89,7 +89,7 @@ extension NewsCell {
   func bind(reactor: NewsCellReactor) {
     self.titleLabel.text = reactor.currentState.title
     self.contentsLabel.text = reactor.currentState.content
-    self.keywordsView.configure(keywords: reactor.currentState.keyewords)
+    self.keywordsView.configure(keywords: reactor.currentState.keywords)
     
     if let imageURL = reactor.currentState.imageURL {
       newsImageView.kf.setImage(with: imageURL)

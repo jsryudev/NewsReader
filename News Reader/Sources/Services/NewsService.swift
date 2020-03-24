@@ -30,7 +30,7 @@ final class NewsService: NewsServiceType {
   func fetchNews() -> Single<[News]> {
     return Single.create { [weak self] single in
       guard let `self` = self else {
-        single(.error(NewsReaderError.unknown))
+        single(.error(NRError.unknown))
         return Disposables.create()
       }
       
@@ -38,7 +38,6 @@ final class NewsService: NewsServiceType {
         .flatMap(self.fetchOpenGraph)
         .filterNil()
         .toArray()
-        .debug()
         .subscribe(
           onSuccess: { news in
             single(.success(news))
@@ -53,21 +52,46 @@ final class NewsService: NewsServiceType {
 }
 
 extension NewsService {
-  func fetchRSS() -> Observable<RSS> {
+  private func makeKeywords(content string: String) -> [String] {
+    let tokens = string.split(separator: String.whiteSpace)
+    
+    var dictionary = [String: Int]()
+    tokens.forEach { token in
+      let key = String(token)
+      if let value = dictionary[key] {
+        dictionary[key] = value + 1
+      } else {
+        dictionary[key] = 1
+      }
+    }
+    
+    let sorted = dictionary.sorted { $0.1 > $1.1 }
+    
+    let keywords: [String]
+    if tokens.count > 3 {
+      keywords = sorted[0...2].map { $0.key }
+    } else {
+      keywords = sorted.map { $0.key }
+    }
+    
+    return keywords
+  }
+  
+  private func fetchRSS() -> Observable<RSS> {
     return Observable.create { [weak self] observable in
       guard let `self` = self else {
-        observable.onError(NewsReaderError.unknown)
+        observable.onError(NRError.rss)
         return Disposables.create()
       }
       
       self.parser.parseAsync { result in
         guard case .success(let feed) = result else {
-          observable.onError(NewsReaderError.rss)
+          observable.onError(NRError.rss)
           return
         }
         
         guard let items = feed.rssFeed?.items else {
-          observable.onError(NewsReaderError.rss)
+          observable.onError(NRError.rss)
           return
         }
         
@@ -87,7 +111,7 @@ extension NewsService {
     }
   }
   
-  func fetchOpenGraph(rss: RSS) -> Single<News?> {
+  private func fetchOpenGraph(rss: RSS) -> Single<News?> {
     return Single.create { single in
       guard let url = URL(string: rss.feed.link ?? "") else {
         single(.success(nil))
@@ -104,13 +128,17 @@ extension NewsService {
           single(.success(nil))
           return
         }
-
+        
+        let attributed = content.attributed
+        let keywords = self.makeKeywords(content: attributed)
+        
         let news = News(
           title: title.attributed,
           url: url,
-          content: content.attributed,
+          content: attributed,
           imageURL: URL(string: openGraph[.image] ?? ""),
-          pubDate: rss.pubDate
+          pubDate: rss.pubDate,
+          keywords: keywords
         )
         
         single(.success(news))
