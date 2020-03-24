@@ -31,6 +31,8 @@ class NewsListViewController: BaseViewController, View {
   
   struct Text {
     static let title = "News"
+    static let alertTitle = "Error"
+    static let alertAction = "알았어요!"
   }
   
   let dataSource = RxTableViewSectionedReloadDataSource<NewsListSection>(
@@ -127,13 +129,13 @@ extension NewsListViewController {
 extension NewsListViewController {
   func showAlert(error: NRError) {
     let alertController = UIAlertController(
-      title: "Error",
+      title: Text.alertTitle,
       message: error.localizedDescription,
       preferredStyle: .alert
     )
     
     let action = UIAlertAction(
-      title: "알았어요!",
+      title: Text.alertAction,
       style: .default
     )
     
