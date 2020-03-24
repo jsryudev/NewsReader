@@ -139,7 +139,7 @@ class SplashViewController: BaseViewController {
     
     versionLabel.snp.makeConstraints { make in
       make.centerX.equalToSuperview()
-      make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(10)
+      make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10)
     }
   }
 }
