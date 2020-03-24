@@ -9,6 +9,10 @@
 import Foundation
 
 extension String {
+  static var whiteSpace: Character {
+    return " "
+  }
+  
   var attributed: String {
     guard let attributed = try? NSAttributedString(
       data: Data(utf8),
