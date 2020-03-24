@@ -68,8 +68,8 @@ class KeywordsView: UIStackView {
 
 extension KeywordsView {
   func configure(keywords: [String]) {
+    // FIXME: Keyword Label
     let count = keywords.count
-    
     switch count {
     case 0:
       keyword1Label.isHidden = true
