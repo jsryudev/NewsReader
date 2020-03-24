@@ -30,7 +30,7 @@ final class NewsService: NewsServiceType {
   func fetchNews() -> Single<[News]> {
     return Single.create { [weak self] single in
       guard let `self` = self else {
-        single(.error(NewsReaderError.unknown))
+        single(.error(NRError.unknown))
         return Disposables.create()
       }
       
@@ -55,18 +55,18 @@ extension NewsService {
   func fetchRSS() -> Observable<RSS> {
     return Observable.create { [weak self] observable in
       guard let `self` = self else {
-        observable.onError(NewsReaderError.unknown)
+        observable.onError(NRError.rss)
         return Disposables.create()
       }
       
       self.parser.parseAsync { result in
         guard case .success(let feed) = result else {
-          observable.onError(NewsReaderError.rss)
+          observable.onError(NRError.rss)
           return
         }
         
         guard let items = feed.rssFeed?.items else {
-          observable.onError(NewsReaderError.rss)
+          observable.onError(NRError.rss)
           return
         }
         
