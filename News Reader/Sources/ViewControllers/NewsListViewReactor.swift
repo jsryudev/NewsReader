@@ -7,6 +7,7 @@
 //
 
 import RxSwift // ReactiveX/RxSwift (https://github.com/ReactiveX/RxSwift)
+import RxCocoa // ReactiveX/RxCocoa (https://github.com/ReactiveX/RxSwift)
 import ReactorKit // ReactorKit/ReactorKit (https://github.com/ReactorKit/ReactorKit)
 import RxDataSources // RxSwiftCommunity/RxDataSources (https://github.com/RxSwiftCommunity/RxDataSources)
 
@@ -27,10 +28,14 @@ class NewsListViewReactor: Reactor {
     var isLoading: Bool
   }
   
+  private let errorRelay = PublishRelay<Error>()
+  let error: Observable<Error>
+  
   let initialState: State
   let newsSerivce: NewsServiceType
   
   init(newsService: NewsServiceType) {
+    self.error = self.errorRelay.asObservable()
     self.newsSerivce = newsService
     self.initialState = State(sections: [], isLoading: false)
   }
@@ -52,6 +57,8 @@ class NewsListViewReactor: Reactor {
           let section = NewsListSection(model: Void(), items: sorted)
           return Mutation.setSections([section])
       }
+      .do(onError: { self.errorRelay.accept($0) })
+      .catchErrorJustReturn(.setLoading(false))
       
       return .concat(
         [
