@@ -89,7 +89,7 @@ extension NewsCell {
   func bind(reactor: NewsCellReactor) {
     self.titleLabel.text = reactor.currentState.title
     self.contentsLabel.text = reactor.currentState.content
-    self.keywordsView.configure(keywords: reactor.currentState.keyewords)
+    self.keywordsView.configure(keywords: reactor.currentState.keywords)
     
     if let imageURL = reactor.currentState.imageURL {
       newsImageView.kf.setImage(with: imageURL)

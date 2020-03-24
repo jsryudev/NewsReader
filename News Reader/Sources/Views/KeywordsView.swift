@@ -67,9 +67,33 @@ class KeywordsView: UIStackView {
 }
 
 extension KeywordsView {
-  func configure(keywords: Keywords) {
-    self.keyword1Label.text = keywords.0
-    self.keyword2Label.text = keywords.1
-    self.keyword3Label.text = keywords.2
+  func configure(keywords: [String]) {
+    let count = keywords.count
+    
+    switch count {
+    case 0:
+      keyword1Label.isHidden = true
+      keyword2Label.isHidden = true
+      keyword3Label.isHidden = true
+    case 1:
+      keyword1Label.isHidden = false
+      keyword2Label.isHidden = true
+      keyword3Label.isHidden = true
+      keyword1Label.text = keywords[0]
+    case 2:
+      keyword1Label.isHidden = false
+      keyword2Label.isHidden = false
+      keyword3Label.isHidden = true
+      keyword1Label.text = keywords[0]
+      keyword2Label.text = keywords[1]
+    case 3:
+      keyword1Label.isHidden = false
+      keyword2Label.isHidden = false
+      keyword3Label.isHidden = false
+      keyword1Label.text = keywords[0]
+      keyword2Label.text = keywords[1]
+      keyword3Label.text = keywords[2]
+    default: return
+    }
   }
 }

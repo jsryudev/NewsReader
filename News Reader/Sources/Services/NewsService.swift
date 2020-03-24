@@ -52,7 +52,32 @@ final class NewsService: NewsServiceType {
 }
 
 extension NewsService {
-  func fetchRSS() -> Observable<RSS> {
+  private func makeKeywords(content string: String) -> [String] {
+    let tokens = string.split(separator: String.whiteSpace)
+    
+    var dictionary = [String: Int]()
+    tokens.forEach { token in
+      let key = String(token)
+      if let value = dictionary[key] {
+        dictionary[key] = value + 1
+      } else {
+        dictionary[key] = 1
+      }
+    }
+    
+    let sorted = dictionary.sorted { $0.1 > $1.1 }
+    
+    let keywords: [String]
+    if tokens.count > 3 {
+      keywords = sorted[0...2].map { $0.key }
+    } else {
+      keywords = sorted.map { $0.key }
+    }
+    
+    return keywords
+  }
+  
+  private func fetchRSS() -> Observable<RSS> {
     return Observable.create { [weak self] observable in
       guard let `self` = self else {
         observable.onError(NRError.rss)
@@ -86,7 +111,7 @@ extension NewsService {
     }
   }
   
-  func fetchOpenGraph(rss: RSS) -> Single<News?> {
+  private func fetchOpenGraph(rss: RSS) -> Single<News?> {
     return Single.create { single in
       guard let url = URL(string: rss.feed.link ?? "") else {
         single(.success(nil))
@@ -103,13 +128,17 @@ extension NewsService {
           single(.success(nil))
           return
         }
-
+        
+        let attributed = content.attributed
+        let keywords = self.makeKeywords(content: attributed)
+        
         let news = News(
           title: title.attributed,
           url: url,
-          content: content.attributed,
+          content: attributed,
           imageURL: URL(string: openGraph[.image] ?? ""),
-          pubDate: rss.pubDate
+          pubDate: rss.pubDate,
+          keywords: keywords
         )
         
         single(.success(news))
