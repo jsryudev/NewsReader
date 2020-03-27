@@ -11,7 +11,6 @@ import Foundation
 enum NRError: Error {
   case unknown
   case rss
-  case opengraph
 }
 
 extension NRError {
@@ -19,7 +18,6 @@ extension NRError {
     switch self {
     case .unknown: return "알 수 없는 문제가 발생했습니다."
     case .rss: return "뉴스 목록을 불러올 수 없습니다.\n잠시후 다시 시도해주세요."
-    case .opengraph: return "메타데이터를 불러올 수 없습니다.\n잠시 후 다시 시도해주세요."
     }
   }
 }
