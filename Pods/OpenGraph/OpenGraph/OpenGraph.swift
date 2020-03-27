@@ -36,7 +36,6 @@ public struct OpenGraph {
                 completion(.success(og))
                 return
             } else if let htmlString = String(data: data, encoding: String.Encoding(rawValue: CFStringConvertEncodingToNSStringEncoding(0x0422))) {
-              htmlString
                 let og = OpenGraph(htmlString: htmlString)
                 completion(.success(og))
                 return
