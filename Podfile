@@ -8,7 +8,7 @@ target 'News Reader' do
   # Pods for News Reader
 
   # RxSwift Core
-  pod 'RxSwift', '~> 5.1'
+  pod 'RxSwift', '~> 5.1.1'
 
   # RxSwift Options
   pod 'RxOptional'
