@@ -65,16 +65,18 @@ extension NewsService {
       }
     }
     
-    let sorted = dictionary.sorted { $0.1 > $1.1 }
-    
-    let keywords: [String]
-    if tokens.count > 3 {
-      keywords = sorted[0...2].map { $0.key }
-    } else {
-      keywords = sorted.map { $0.key }
+    let sortedByKey = dictionary.keys.sorted(by: <)
+    let sorted = sortedByKey.sorted { lk, rk -> Bool in
+      let lv = dictionary[lk]!
+      let rv = dictionary[rk]!
+      if lv == rv {
+        return lk < rk
+      } else {
+        return lv > rv
+      }
     }
-    
-    return keywords
+  
+    return tokens.count > 3 ? Array(sorted[0...2]) : sorted
   }
   
   private func fetchRSS() -> Observable<RSS> {
